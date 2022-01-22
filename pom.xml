@@ -9,7 +9,12 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
+        <module>juc</module>
+        <module>jvm</module>
+        <module>leetcode</module>
+        <module>thread</module>
         <module>zookeeper-semaphore</module>
+        <module>jdk8</module>
     </modules>
 
     <dependencies>
