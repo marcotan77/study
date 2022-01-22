@@ -8,27 +8,39 @@ package com.tan.thread;
  **/
 public final class Location2 {
 
-    private double x;
-    private double y;
+    public static void main(String[] args) {
 
-    public Location2(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
 
-    public double getX() {
-        return x;
-    }
+        Thread thread = new Thread(() -> {
+            int i = 0;
+            while (i < 10) {
+                if (i == 5){
+                    break;
+                }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("子线程");
+                i++;
+            }
 
-    public void setX(double x) {
-        this.x = x;
-    }
+        });
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-    public double getY() {
-        return y;
-    }
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-    public void setY(double y) {
-        this.y = y;
+        System.out.println("主线程");
+
     }
 }

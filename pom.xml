@@ -9,11 +9,7 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>easyExcel</module>
-        <module>spring5</module>
-        <module>api</module>
         <module>zookeeper-semaphore</module>
-        <module>netty_demo</module>
     </modules>
 
     <dependencies>

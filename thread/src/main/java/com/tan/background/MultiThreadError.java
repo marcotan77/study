@@ -1,10 +1,6 @@
 package com.tan.background;
 
-import java.util.HashMap;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.text.DecimalFormat;
 
 /**
  * @author Tan.cs
@@ -17,7 +13,13 @@ public class MultiThreadError {
 
     public static void main(String[] args) {
         //
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(1, 5, 60, TimeUnit.NANOSECONDS, new ArrayBlockingQueue<>(100));
+//        ThreadPoolExecutor executor = new ThreadPoolExecutor(1, 5, 60, TimeUnit.NANOSECONDS, new ArrayBlockingQueue<>(100));
+
+        DecimalFormat format = new DecimalFormat("0.00");
+        System.out.println(format.format((float)1/10));
 
     }
+
+
+    
 }
