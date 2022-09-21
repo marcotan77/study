@@ -15,6 +15,7 @@
         <module>thread</module>
         <module>zookeeper-semaphore</module>
         <module>jdk8</module>
+        <module>apifoxScript</module>
     </modules>
 
     <dependencies>
@@ -41,6 +42,13 @@
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-client</artifactId>
             <version>4.5.1</version>
+        </dependency>
+
+        <!--huTool 工具类-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.7</version>
         </dependency>
     </dependencies>
 
