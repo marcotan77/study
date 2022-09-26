@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=GMT%2B8&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+
+#整合mybatis
+mybatis:
+  type-aliases-package: com.example.springboot.domain #给pojo实体类起别名
+  mapper-locations: mybatis/*.xml   #接口的配置文件的位置 我这里接口配置文件是UserMapper.xml 如下图所示
