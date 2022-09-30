@@ -1,5 +1,11 @@
 package com.example.springboot.aspect;
 
+import java.util.Date;
+
+import com.example.springboot.domain.ChangeObjectInfo;
+import com.example.springboot.domain.ChangeRecord;
+import com.example.springboot.service.ChangeObjectInfoService;
+import com.example.springboot.service.ChangeRecordService;
 import org.apache.ibatis.binding.MapperMethod;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -17,6 +23,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -35,11 +42,17 @@ public class ChangeLogAspect {
     @Resource
     private SqlSessionFactory sqlSessionFactory;
 
+    @Resource
+    private ChangeObjectInfoService changeObjectInfoService;
+
+    @Resource
+    private ChangeRecordService changeRecordService;
+
     static {
         backUpList.add("SysUser");
     }
 
-    @Pointcut("execution(* com.example.springboot.mapper.SysUserMapper.update*(..))")
+    @Pointcut("execution(* com.example.springboot.mapper.*.update*(..))")
     public void pointCut() {
     }
 
@@ -108,70 +121,93 @@ public class ChangeLogAspect {
      * @throws InvocationTargetException
      */
     private void backUpToLog(String backupNameSpace, String methodName, Object args, Object target, MethodSignature signature) throws IllegalAccessException, InvocationTargetException {
-        if (backUpList.contains(backupNameSpace)) {
-            if (methodName.contains("delete") || methodName.contains("update")) {
-                /**操作类型  1：修改  2 ：删除**/
-                Integer operatorType = 1;
-                if (methodName.contains("delete"))
-                    operatorType = 2;
+        ChangeObjectInfo objectValue = changeObjectInfoService.getByObjectValue(backupNameSpace);
+        if (Objects.isNull(objectValue) || !Objects.equals(objectValue.getObjectValue(), backupNameSpace)) {
+            return;
+        }
 
-                // 参数class
-                Class<?> argsClass = args.getClass();
-                Method[] argsMethods = argsClass.getDeclaredMethods();
+//        if (backUpList.contains(backupNameSpace)) {
+        if (methodName.contains("delete") || methodName.contains("update")) {
+            /**操作类型  1：修改  2 ：删除**/
+            Integer operatorType = 1;
+            if (methodName.contains("delete"))
+                operatorType = 2;
 
-                // 目标class
-                Class<?> targetClass = target.getClass();
-                Method[] targetMethod = targetClass.getDeclaredMethods();
+            // 参数class
+            Class<?> argsClass = args.getClass();
+            Method[] argsMethods = argsClass.getDeclaredMethods();
 
-                Class<?> aClass = signature.getMethod().getDeclaringClass();
-                Method[] methods1 = aClass.getMethods();
+            // 目标class
+            Class<?> targetClass = target.getClass();
+            Method[] targetMethod = targetClass.getDeclaredMethods();
 
-                // 过滤出selectByPrimaryKey方法
-                List<Method> methodList = Arrays.stream(methods1).filter(item -> item.getName().contains("selectByPrimaryKey")).collect(Collectors.toList());
-                if (methodList.size() == 0) {
-                    return;
-                }
-                SqlSession sqlSession = sqlSessionFactory.openSession();
-                MapperMethod mapperMethod = new MapperMethod(target.getClass(), methodList.get(0), sqlSession.getConfiguration());
-                Object[] param = {args};
-                // 获取原来的对象
-                Object backupObj = mapperMethod.execute(sqlSession, param);
+            Class<?> aClass = signature.getMethod().getDeclaringClass();
+            Method[] methods1 = aClass.getMethods();
 
-                List<Method> originalMethod = filterField(argsMethods);
+            // 过滤出selectByPrimaryKey方法
+            List<Method> methodList = Arrays.stream(methods1).filter(item -> item.getName().contains("selectByPrimaryKey")).collect(Collectors.toList());
+            if (methodList.size() == 0) {
+                return;
+            }
+            SqlSession sqlSession = sqlSessionFactory.openSession();
+            MapperMethod mapperMethod = new MapperMethod(target.getClass(), methodList.get(0), sqlSession.getConfiguration());
+            Object[] param = {args};
+            // 获取原来的对象
+            Object backupObj = mapperMethod.execute(sqlSession, param);
 
-                for (int i = 0; i < originalMethod.size(); i++) {
+            List<Method> originalMethod = filterField(argsMethods);
 
-                    Method method = originalMethod.get(i);
-
-                    String fieldName = method.getName().substring(3).toUpperCase();
-
-                    String originalValue = "";
-                    String modifyValue = "";
-
-                    Object originalObj = method.invoke(backupObj);
-                    Object modifyObj = method.invoke(args);
-
-                    // TODO 对不同的字段类型进行赋值
-//                    originalValue = busiLogService.getFieldValue(fieldName, originalValue);
-//                    modifyValue = busiLogService.getFieldValue(fieldName, modifyValue);
-                    if (originalObj != null && originalObj.toString().trim().length() > 0)
-                        originalValue = originalObj.toString();
-                    if (modifyObj != null && modifyObj.toString().trim().length() > 0)
-                        modifyValue = modifyObj.toString();
-                    if (originalValue == null && modifyValue == null)
-                        continue;
-
-                    if ((originalValue != null && modifyValue != null && (!originalValue.equals(modifyValue)))
-                            || (originalValue == null && modifyValue != null)
-                            || (originalValue != null && modifyValue == null)) {
-                        // TODO 保存到数据库
-                        System.out.println(fieldName + ": " + originalValue + "   ======>   " + modifyValue);
-                    }
+            String dataNo = "";
+            for (Method tmpMethod : originalMethod) {
+                if (Objects.equals(tmpMethod.getName().substring(3).toUpperCase(), objectValue.getKeyField().toUpperCase())) {
+                    dataNo = tmpMethod.invoke(backupObj).toString();
+                    break;
                 }
             }
+            for (int i = 0; i < originalMethod.size(); i++) {
 
+                Method method = originalMethod.get(i);
 
+                String fieldName = method.getName().substring(3).toUpperCase();
+
+                String originalValue = "";
+                String modifyValue = "";
+
+                Object originalObj = method.invoke(backupObj);
+                Object modifyObj = method.invoke(args);
+
+                // TODO 对不同的字段类型进行赋值
+//                    originalValue = busiLogService.getFieldValue(fieldName, originalValue);
+//                    modifyValue = busiLogService.getFieldValue(fieldName, modifyValue);
+                if (originalObj != null && originalObj.toString().trim().length() > 0)
+                    originalValue = originalObj.toString();
+                if (modifyObj != null && modifyObj.toString().trim().length() > 0)
+                    modifyValue = modifyObj.toString();
+                if (originalValue == null && modifyValue == null)
+                    continue;
+
+                if ((originalValue != null && modifyValue != null && (!originalValue.equals(modifyValue)))
+                        || (originalValue == null && modifyValue != null)
+                        || (originalValue != null && modifyValue == null)) {
+                    // 保存到数据库
+                    ChangeRecord record = new ChangeRecord();
+                    record.setBusinessLogType(operatorType);
+                    record.setModule(objectValue.getModule());
+                    record.setObjectValue(objectValue.getObjectValue());
+                    record.setDataNo(dataNo);
+                    record.setFieldName(fieldName);
+                    record.setOriginalValue(originalValue);
+                    record.setModifiedValue(modifyValue);
+                    record.setCreatedBy("admin");
+                    record.setCreatedTime(new Date());
+                    changeRecordService.insertSelective(record);
+                    System.out.println(fieldName + ": " + originalValue + "   ======>   " + modifyValue);
+                }
+            }
         }
+
+
+//        }
     }
 
     /**

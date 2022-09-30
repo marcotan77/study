@@ -1,5 +1,6 @@
-package com.example.springboot.service;
+package com.example.springboot.service.impl;
 
+import com.example.springboot.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -7,7 +8,7 @@ import com.example.springboot.mapper.SysUserMapper;
 import com.example.springboot.domain.SysUser;
 
 @Service
-public class SysUserServiceImpl implements SysUserService{
+public class SysUserServiceImpl implements SysUserService {
 
     @Autowired
     private SysUserMapper sysUserMapper;
