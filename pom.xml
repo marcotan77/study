@@ -17,6 +17,8 @@
         <module>jdk8</module>
         <module>apifoxScript</module>
         <module>springboot</module>
+        <module>spring-oauth2-base</module>
+        <module>spring-oauth2-server</module>
     </modules>
 
     <dependencies>
