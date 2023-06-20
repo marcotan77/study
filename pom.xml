@@ -11,6 +11,9 @@
     <modules>
         <module>thread</module>
         <module>springboot</module>
+        <module>spring-security</module>
+        <module>dubbo-samples</module>
+        <module>mybatis-generator</module>
     </modules>
 
     <properties>

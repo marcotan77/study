@@ -1,0 +1,20 @@
+package ${package.Other};
+
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
+import ${package.Entity}.${entity};
+
+@Mapper(componentModel = "spring")
+public interface ${entity.replace("Base","").replace("DO","")}Convertor {
+    ${entity.replace("Base","").replace("DO","")}Convertor INSTANCE = Mappers.getMapper(${entity.replace("Base","").replace("DO","")}Convertor.class);
+
+    ${entity} to${entity}(${entity.replace("Base","").replace("DO","")}Query ${entity.replace("Base","").replace("DO","")}Query);
+
+    ${entity} t${entity}(${entity.replace("Base","").replace("DO","")}DTO ${entity.replace("Base","").replace("DO","")}DTO);
+
+    ${entity.replace("Base","").replace("DO","")}DTO to${entity.replace("Base","").replace("DO","")}DTO(${entity.replace("Base","").replace("DO","")}DO ${entity.replace("Base","").replace("DO","")}DO);
+
+    List<${entity}> to${entity}List(List<${entity.replace("Base","").replace("DO","")}DTO> ${entity.replace("Base","").replace("DO","")}DTOList);
+
+    List< ${entity.replace("Base","").replace("DO","")}DTO> to${entity.replace("Base","").replace("DO","")}DTOList(List<BaseUserDO>  ${entity.replace("Base","").replace("DO","")}DTOList);
+}
