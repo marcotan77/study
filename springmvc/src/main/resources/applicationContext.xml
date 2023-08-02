@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 加载解析jdbc.properties的标签 -->
+    <context:property-placeholder location="classpath:db.properties"/>
+    <!-- service层的注解扫描 -->
+    <context:component-scan base-package="com.xxx"/>
+    <!-- 配置数据源bean -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${m_driver}"/>
+        <property name="url" value="${m_url}"/>
+        <property name="username" value="${m_user}"/>
+        <property name="password" value="${m_pwd}"/>
+    </bean>
+    <!-- 配置SqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- 配置UserMapper扫描 -->
+    <bean id="mapper" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.lyl.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+    <!-- 配置事务管理器 -->
+    <bean id="tx" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- 配置事务管理通知 -->
+    <tx:advice id="txManager" transaction-manager="tx">
+        <tx:attributes>
+            <tx:method name="sel*" read-only="true"/>
+            <tx:method name="del*"/>
+            <tx:method name="up*"/>
+            <tx:method name="ins*"/>
+        </tx:attributes>
+    </tx:advice>
+    <!-- 用AOP将事务管理通知切入方法 -->
+    <aop:config>
+        <aop:pointcut id="my" expression="execution(* com.lyl.service.impl.*.*(..))"/>
+        <aop:advisor advice-ref="txManager" pointcut-ref="my"/>
+    </aop:config>
+</beans>

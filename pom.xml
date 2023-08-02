@@ -14,6 +14,7 @@
         <module>spring-security</module>
         <module>dubbo-samples</module>
         <module>mybatis-generator</module>
+        <module>springmvc</module>
     </modules>
 
     <properties>

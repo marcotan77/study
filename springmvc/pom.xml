@@ -1,0 +1,166 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.tan</groupId>
+        <artifactId>code</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>springmvc</artifactId>
+    <packaging>war</packaging>
+    <name>springmvc Maven Webapp</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <spring-version>5.2.9.RELEASE</spring-version>
+        <junit-version>4.13</junit-version>
+        <servlet-api-version>2.5</servlet-api-version>
+        <spring-core-version>${spring-version}</spring-core-version>
+        <spring-beans-version>${spring-version}</spring-beans-version>
+        <spring-context-version>${spring-version}</spring-context-version>
+        <spring-tx-version>${spring-version}</spring-tx-version>
+        <spring-aspects-version>${spring-version}</spring-aspects-version>
+        <spring-jdbc-version>${spring-version}</spring-jdbc-version>
+        <spring-web-version>${spring-version}</spring-web-version>
+        <spring-webmvc-version>${spring-version}</spring-webmvc-version>
+        <mybatis-version>3.5.3</mybatis-version>
+        <mybatis-spring-version>2.0.3</mybatis-spring-version>
+        <mysql-version>8.0.23</mysql-version>
+        <slf4j-log4j12-vsersion>1.7.25</slf4j-log4j12-vsersion>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.6.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j-log4j12-vsersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit-version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- servlet-api的依赖 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>${servlet-api-version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- spring-core的依赖 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring-core-version}</version>
+        </dependency>
+
+        <!-- spring-beans的依赖 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring-beans-version}</version>
+        </dependency>
+
+        <!-- spring-context的依赖 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring-context-version}</version>
+        </dependency>
+
+        <!-- spring-tx的依赖 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring-tx-version}</version>
+        </dependency>
+
+        <!-- spring-aspects的依赖 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>${spring-aspects-version}</version>
+        </dependency>
+
+        <!-- spring-jdbc的依赖 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring-jdbc-version}</version>
+        </dependency>
+
+        <!-- spring-web的依赖 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring-web-version}</version>
+        </dependency>
+
+        <!-- spring-webmvc的依赖 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring-webmvc-version}</version>
+        </dependency>
+
+        <!-- mybatis的核心依赖 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis-version}</version>
+        </dependency>
+
+        <!-- mybatis-spring的依赖 -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>${mybatis-spring-version}</version>
+        </dependency>
+
+        <!--  添加mysql依赖  -->
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!--
+        有时候，比如mybatis的mapper.xml文件，我们习惯把它和Mapper.java放一起，都在src/main/java下面，这样利用maven打包时，
+        就需要修改pom.xml文件，来把mapper.xml文件一起打包进jar或者war里了，否则，这些文件不会被打包的。
+        -->
+        <!-- 资源目录 -->
+        <resources>
+            <resource>
+                <!-- 设定主资源目录 -->
+                <directory>src/main/java</directory>
+                <!-- 需要读取的文件 -->
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+</project>

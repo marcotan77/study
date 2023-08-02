@@ -1,5 +1,6 @@
 package com.example.springboot.util;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.function.Function;
@@ -156,4 +157,13 @@ public class PlaceholderResolver {
 //        }
 //        return resolveByRule(content, placeholderValue -> String.valueOf(ReflectionUtils.getValueByFieldPath(obj, placeholderValue)));
 //    }
+
+    public static void main(String[] args) {
+        Map<String,Object> param = new HashMap<>();
+        param.put("approvalNumber","AC202301030001");
+        param.put("linkUrl","https://www.baidu.com");
+        String templateContent = "您有[司机付款流程]待审批任务，审批编码:${approvalNumber}，点击可${}查看具体审批内容!${linkUrl}";
+        PlaceholderResolver defaultResolver1 = PlaceholderResolver.getDefaultResolver();
+        System.out.println(defaultResolver1.resolveByMap(templateContent,param));
+    }
 }
