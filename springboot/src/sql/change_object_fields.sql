@@ -1,1 +1,0 @@
-INSERT INTO `change_object_fields`(`id`, `field_name`, `field_value`, `object_id`, `created_by`, `created_time`, `modified_by`, `modified_time`, `rec_flag`) VALUES (1, '用户名称', 'userName', 1, 'admin', '2022-09-30 16:18:26', NULL, NULL, NULL);
