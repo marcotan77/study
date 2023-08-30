@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot.mapper.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.example.springboot.domain.SysUser">
+    <!--@mbg.generated-->
+    <!--@Table sys_user-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+    <result column="user_acct" jdbcType="VARCHAR" property="userAcct" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_pinyin" jdbcType="VARCHAR" property="userPinyin" />
+    <result column="user_mobnum" jdbcType="VARCHAR" property="userMobnum" />
+    <result column="phone_sms" jdbcType="VARCHAR" property="phoneSms" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="login_pw" jdbcType="VARCHAR" property="loginPw" />
+    <result column="pw_salt" jdbcType="VARCHAR" property="pwSalt" />
+    <result column="user_age" jdbcType="INTEGER" property="userAge" />
+    <result column="user_gen" jdbcType="VARCHAR" property="userGen" />
+    <result column="user_sts" jdbcType="VARCHAR" property="userSts" />
+    <result column="user_addr" jdbcType="VARCHAR" property="userAddr" />
+    <result column="user_telnum" jdbcType="VARCHAR" property="userTelnum" />
+    <result column="rec_flag" jdbcType="CHAR" property="recFlag" />
+    <result column="the_dept" jdbcType="BIGINT" property="theDept" />
+    <result column="created_by" jdbcType="BIGINT" property="createdBy" />
+    <result column="created_date" jdbcType="TIMESTAMP" property="createdDate" />
+    <result column="modified_by" jdbcType="BIGINT" property="modifiedBy" />
+    <result column="modified_date" jdbcType="TIMESTAMP" property="modifiedDate" />
+    <result column="personal_id" jdbcType="BIGINT" property="personalId" />
+    <result column="load_time" jdbcType="TIMESTAMP" property="loadTime" />
+    <result column="user_type" jdbcType="VARCHAR" property="userType" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="old_user_acct" jdbcType="VARCHAR" property="oldUserAcct" />
+    <result column="profile_picture" jdbcType="VARCHAR" property="profilePicture" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, id_card, user_acct, user_name, user_pinyin, user_mobnum, phone_sms, user_email, 
+    login_pw, pw_salt, user_age, user_gen, user_sts, user_addr, user_telnum, rec_flag, 
+    the_dept, created_by, created_date, modified_by, modified_date, personal_id, load_time, 
+    user_type, remark, old_user_acct, profile_picture
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from sys_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.springboot.domain.SysUser" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sys_user (id_card, user_acct, user_name, 
+      user_pinyin, user_mobnum, phone_sms, 
+      user_email, login_pw, pw_salt, 
+      user_age, user_gen, user_sts, 
+      user_addr, user_telnum, rec_flag, 
+      the_dept, created_by, created_date, 
+      modified_by, modified_date, personal_id, 
+      load_time, user_type, remark, 
+      old_user_acct, profile_picture)
+    values (#{idCard,jdbcType=VARCHAR}, #{userAcct,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userPinyin,jdbcType=VARCHAR}, #{userMobnum,jdbcType=VARCHAR}, #{phoneSms,jdbcType=VARCHAR}, 
+      #{userEmail,jdbcType=VARCHAR}, #{loginPw,jdbcType=VARCHAR}, #{pwSalt,jdbcType=VARCHAR}, 
+      #{userAge,jdbcType=INTEGER}, #{userGen,jdbcType=VARCHAR}, #{userSts,jdbcType=VARCHAR}, 
+      #{userAddr,jdbcType=VARCHAR}, #{userTelnum,jdbcType=VARCHAR}, #{recFlag,jdbcType=CHAR}, 
+      #{theDept,jdbcType=BIGINT}, #{createdBy,jdbcType=BIGINT}, #{createdDate,jdbcType=TIMESTAMP}, 
+      #{modifiedBy,jdbcType=BIGINT}, #{modifiedDate,jdbcType=TIMESTAMP}, #{personalId,jdbcType=BIGINT}, 
+      #{loadTime,jdbcType=TIMESTAMP}, #{userType,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{oldUserAcct,jdbcType=VARCHAR}, #{profilePicture,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.springboot.domain.SysUser" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="idCard != null">
+        id_card,
+      </if>
+      <if test="userAcct != null">
+        user_acct,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userPinyin != null">
+        user_pinyin,
+      </if>
+      <if test="userMobnum != null">
+        user_mobnum,
+      </if>
+      <if test="phoneSms != null">
+        phone_sms,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="loginPw != null">
+        login_pw,
+      </if>
+      <if test="pwSalt != null">
+        pw_salt,
+      </if>
+      <if test="userAge != null">
+        user_age,
+      </if>
+      <if test="userGen != null">
+        user_gen,
+      </if>
+      <if test="userSts != null">
+        user_sts,
+      </if>
+      <if test="userAddr != null">
+        user_addr,
+      </if>
+      <if test="userTelnum != null">
+        user_telnum,
+      </if>
+      <if test="recFlag != null">
+        rec_flag,
+      </if>
+      <if test="theDept != null">
+        the_dept,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdDate != null">
+        created_date,
+      </if>
+      <if test="modifiedBy != null">
+        modified_by,
+      </if>
+      <if test="modifiedDate != null">
+        modified_date,
+      </if>
+      <if test="personalId != null">
+        personal_id,
+      </if>
+      <if test="loadTime != null">
+        load_time,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="oldUserAcct != null">
+        old_user_acct,
+      </if>
+      <if test="profilePicture != null">
+        profile_picture,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="userAcct != null">
+        #{userAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPinyin != null">
+        #{userPinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobnum != null">
+        #{userMobnum,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneSms != null">
+        #{phoneSms,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPw != null">
+        #{loginPw,jdbcType=VARCHAR},
+      </if>
+      <if test="pwSalt != null">
+        #{pwSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="userAge != null">
+        #{userAge,jdbcType=INTEGER},
+      </if>
+      <if test="userGen != null">
+        #{userGen,jdbcType=VARCHAR},
+      </if>
+      <if test="userSts != null">
+        #{userSts,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddr != null">
+        #{userAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="userTelnum != null">
+        #{userTelnum,jdbcType=VARCHAR},
+      </if>
+      <if test="recFlag != null">
+        #{recFlag,jdbcType=CHAR},
+      </if>
+      <if test="theDept != null">
+        #{theDept,jdbcType=BIGINT},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdDate != null">
+        #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedBy != null">
+        #{modifiedBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifiedDate != null">
+        #{modifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="personalId != null">
+        #{personalId,jdbcType=BIGINT},
+      </if>
+      <if test="loadTime != null">
+        #{loadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="oldUserAcct != null">
+        #{oldUserAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="profilePicture != null">
+        #{profilePicture,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.springboot.domain.SysUser">
+    <!--@mbg.generated-->
+    update sys_user
+    <set>
+      <if test="idCard != null">
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="userAcct != null">
+        user_acct = #{userAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPinyin != null">
+        user_pinyin = #{userPinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobnum != null">
+        user_mobnum = #{userMobnum,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneSms != null">
+        phone_sms = #{phoneSms,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPw != null">
+        login_pw = #{loginPw,jdbcType=VARCHAR},
+      </if>
+      <if test="pwSalt != null">
+        pw_salt = #{pwSalt,jdbcType=VARCHAR},
+      </if>
+      <if test="userAge != null">
+        user_age = #{userAge,jdbcType=INTEGER},
+      </if>
+      <if test="userGen != null">
+        user_gen = #{userGen,jdbcType=VARCHAR},
+      </if>
+      <if test="userSts != null">
+        user_sts = #{userSts,jdbcType=VARCHAR},
+      </if>
+      <if test="userAddr != null">
+        user_addr = #{userAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="userTelnum != null">
+        user_telnum = #{userTelnum,jdbcType=VARCHAR},
+      </if>
+      <if test="recFlag != null">
+        rec_flag = #{recFlag,jdbcType=CHAR},
+      </if>
+      <if test="theDept != null">
+        the_dept = #{theDept,jdbcType=BIGINT},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="createdDate != null">
+        created_date = #{createdDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedBy != null">
+        modified_by = #{modifiedBy,jdbcType=BIGINT},
+      </if>
+      <if test="modifiedDate != null">
+        modified_date = #{modifiedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="personalId != null">
+        personal_id = #{personalId,jdbcType=BIGINT},
+      </if>
+      <if test="loadTime != null">
+        load_time = #{loadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="oldUserAcct != null">
+        old_user_acct = #{oldUserAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="profilePicture != null">
+        profile_picture = #{profilePicture,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.springboot.domain.SysUser">
+    <!--@mbg.generated-->
+    update sys_user
+    set id_card = #{idCard,jdbcType=VARCHAR},
+      user_acct = #{userAcct,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_pinyin = #{userPinyin,jdbcType=VARCHAR},
+      user_mobnum = #{userMobnum,jdbcType=VARCHAR},
+      phone_sms = #{phoneSms,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      login_pw = #{loginPw,jdbcType=VARCHAR},
+      pw_salt = #{pwSalt,jdbcType=VARCHAR},
+      user_age = #{userAge,jdbcType=INTEGER},
+      user_gen = #{userGen,jdbcType=VARCHAR},
+      user_sts = #{userSts,jdbcType=VARCHAR},
+      user_addr = #{userAddr,jdbcType=VARCHAR},
+      user_telnum = #{userTelnum,jdbcType=VARCHAR},
+      rec_flag = #{recFlag,jdbcType=CHAR},
+      the_dept = #{theDept,jdbcType=BIGINT},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      created_date = #{createdDate,jdbcType=TIMESTAMP},
+      modified_by = #{modifiedBy,jdbcType=BIGINT},
+      modified_date = #{modifiedDate,jdbcType=TIMESTAMP},
+      personal_id = #{personalId,jdbcType=BIGINT},
+      load_time = #{loadTime,jdbcType=TIMESTAMP},
+      user_type = #{userType,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      old_user_acct = #{oldUserAcct,jdbcType=VARCHAR},
+      profile_picture = #{profilePicture,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
