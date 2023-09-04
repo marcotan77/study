@@ -12,6 +12,7 @@
 
     <modules>
         <module>rabbitmq</module>
+        <module>zookeeper</module>
     </modules>
 
     <properties>

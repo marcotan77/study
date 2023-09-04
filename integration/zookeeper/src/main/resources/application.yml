@@ -3,9 +3,9 @@ server:
 
 zookeeper:
   # zookeeper Server 地址,如果有多个使用逗号分隔。如 ip1:port1,ip2:port2,ip3:port3
-  address: localhost:2181
+  address: 192.168.108.100:2181,192.168.108.100:2182,192.168.108.100:2183
   retryCount: 5               # 重试次数
   initElapsedTimeMs: 1000     # 初始重试间隔时间
   maxElapsedTimeMs: 5000      # 最大重试间隔时间
   sessionTimeoutMs: 30000     # Session 超时时间
-  connectionTimeoutMs: 10000  # 连接超时时间
+  connectionTimeoutMs: 60000  # 连接超时时间

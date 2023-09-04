@@ -39,6 +39,12 @@
 			<optional>true</optional>
 		</dependency>
 
+		<dependency>
+			<groupId>com.xxx</groupId>
+			<artifactId>component-dto</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+
 		<!-- 创建 Zookeeper 客户端依赖，一定要和 Zookeeper Server 版本保持一致 curator依赖中其实也包含，但是这边为了版本
         对应显示的声明了一下-->
 		<dependency>
@@ -59,6 +65,12 @@
 			<groupId>com.101tec</groupId>
 			<artifactId>zkclient</artifactId>
 			<version>0.11</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.curator</groupId>
+			<artifactId>curator-recipes</artifactId>
+			<version>5.1.0</version>
 		</dependency>
 
 	</dependencies>
