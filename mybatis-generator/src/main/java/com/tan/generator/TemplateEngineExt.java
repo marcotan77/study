@@ -35,7 +35,7 @@ public class TemplateEngineExt extends VelocityTemplateEngine {
                 Optional.ofNullable(config.getInjectionConfig()).ifPresent(t -> {
                     t.beforeOutputFile(tableInfo, objectMap);
                     // 输出自定义文件
-                    this.outputCustomFile(t.getCustomFile(), tableInfo, objectMap);
+//                    this.outputCustomFile(t.getCustomFile(), tableInfo, objectMap);
                 });
                 // entity
                 outputEntity(tableInfo, objectMap);
@@ -61,15 +61,15 @@ public class TemplateEngineExt extends VelocityTemplateEngine {
      * @param objectMap  渲染数据
      * @since 3.5.1
      */
-    @Override
-    protected void outputCustomFile(Map<String, String> customFile, TableInfo tableInfo, Map<String, Object> objectMap) {
-        String otherPath = getPathInfo(OutputFile.other);
-        customFile.forEach((key, value) -> {
-            String upperClassName = (String) objectMap.get("upperClassName");
-            String fileName = String.format((otherPath + File.separator + upperClassName + "%s"), key);
-            outputFile(new File(fileName), objectMap, value, getConfigBuilder().getInjectionConfig().isFileOverride());
-        });
-    }
+//    @Override
+//    protected void outputCustomFile(Map<String, String> customFile, TableInfo tableInfo, Map<String, Object> objectMap) {
+//        String otherPath = getPathInfo(OutputFile.other);
+//        customFile.forEach((key, value) -> {
+//            String upperClassName = (String) objectMap.get("upperClassName");
+//            String fileName = String.format((otherPath + File.separator + upperClassName + "%s"), key);
+//            outputFile(new File(fileName), objectMap, value, getConfigBuilder().getInjectionConfig().isFileOverride());
+//        });
+//    }
 
 
 }

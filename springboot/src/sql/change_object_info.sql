@@ -1,1 +1,0 @@
-INSERT INTO `change_object_info`(`id`, `object_name`, `object_value`, `key_field`, `module`, `created_by`, `created_time`, `modified_by`, `modified_time`, `rec_flag`) VALUES (1, '用户信息', 'SysUser', 'userAcct', '基础信息模块', 'admin', '2022-09-30 16:17:28', NULL, NULL, 1);

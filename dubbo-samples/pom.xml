@@ -70,6 +70,8 @@
 <!--                <version>${dubbo.version}</version>-->
 <!--                <type>pom</type>-->
 <!--            </dependency>-->
+
+
         </dependencies>
     </dependencyManagement>
 

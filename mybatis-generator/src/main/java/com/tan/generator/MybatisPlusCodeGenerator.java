@@ -35,16 +35,18 @@ public class MybatisPlusCodeGenerator {
         // 数据库配置
         String mysqlIp = "127.0.0.1";
         int mysqlPort = 3306;
-        String mysqlDataBase = "guns";
+        String mysqlDataBase = "big_market_01";
         String url = String.format("jdbc:mysql://%s:%d/%s?useSSL=false&characterEncoding=utf8", mysqlIp, mysqlPort, mysqlDataBase);
         String username = "root";
         String password = "root";
         /**表名，多个使用,分隔**/
         //String tableNames = "base_area,base_driver,base_item_details,base_items,base_login_log,base_modify_record,base_module,base_operation_log,base_organize,base_organize_chain,base_organize_chain_user,base_parameter,base_permission,base_permission_scope,base_redis_source,base_role,base_service_license,base_sub_system,base_user,base_user_contact,base_user_log_on,base_user_organize,base_user_privacy,base_user_role,base_wechat_user_oauth,base_worker_node";
-        String tableNames = "sys_user";
+        String tableNames = "user_behavior_rebate_order_000";
 
         // 去掉的前缀
         String[] tablePrefix = new String[]{""};//base_
+        // 去掉的后缀
+        String[] tableSuffix = new String[]{"_000"};//_000
 
         // 输出路径 + 定制部分pkg
         String projectPath = System.getProperty("user.dir") + "/mybatis-generator/code/" + DateUtil.format(new Date(), "yyyyMMddHHmmss") + "/";
@@ -111,7 +113,9 @@ public class MybatisPlusCodeGenerator {
                 .strategyConfig(builder -> {
 
                     builder.addInclude(tableNames.split(",")) // 设置需要生成的表名
-                            .addTablePrefix(tablePrefix);// 设置过滤表前缀
+                            .addTablePrefix(tablePrefix)// 设置过滤表前缀
+                            .addTableSuffix(tableSuffix)
+                    ;
 
                     builder.entityBuilder()
 //                            .superClass(BaseEntity.class)

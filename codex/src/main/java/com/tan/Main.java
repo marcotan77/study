@@ -1,23 +1,29 @@
 package com.tan;
 
+import cn.hutool.core.util.NumberUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        /* 初始化链表 1 -> 3 -> 2 -> 5 -> 4 */
-        // 初始化各个节点
-        LinkedNode<Integer> n0 = new LinkedNode<>(1,
-                new LinkedNode<>(3, new LinkedNode<>(2, new LinkedNode<>(5, new LinkedNode<>(4, null))))
-        );
+//        StringBuilder sb = new StringBuilder();
+//        Random random = new Random();
+//
+//        for (int i = 0; i < 10; i++) {
+//            sb.append(random.nextInt(10)); // 生成0-9的随机数字
+//        }
+//
+//        String randomNumberStr = sb.toString();
+//        System.out.println("生成的十位随机数字符串: " + randomNumberStr);
 
-        List<String> strings = Arrays.asList("a","b");
 
-        System.out.println(JSON.toJSONString(strings));
-
+        String a = "A\nA\n";
+        System.out.println("Original string: \"" + a.trim() + "\"");
     }
+
+
+
 }
