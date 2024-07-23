@@ -14,7 +14,6 @@
         <module>codex</module>
         <module>integration</module>
         <module>integration/kafka</module>
-        <module>design-pattern</module>
     </modules>
 
     <properties>
